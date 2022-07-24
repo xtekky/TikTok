@@ -1,5 +1,5 @@
 # Intercepting TikTok http traffic
-By &! Tekky#1337
+By &! Tekky#1337 (beginner version)
 
 ## Requirements
  - Http Toolkit: https://httptoolkit.tech/
