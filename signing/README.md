@@ -48,3 +48,28 @@ encrypt key (key is hex list)
             hexs[i] = D
         return hexs
 ```
+
+encrypt with key
+```py
+
+
+    def __xor_hash_list(self, HL, HK):
+        tmp_add = []
+        tmp_hex = [] + HK
+        A = B = C = D = E = F = G = None
+        rang = self.__calc_ranges(self.LEN)
+        for i in rang:
+            A = HL[i]
+            B = 0 if len(tmp_add) == 0 else tmp_add[-1]
+            C = self.__hex_max(HK[i + 1] + int(B))
+            tmp_add.append(C)
+            D = tmp_hex[C]
+            tmp_hex[i + 1] = D
+            E = self.__hex_max(D + D)
+            F = tmp_hex[E]
+            G = A ^ F
+            HL[i] = G
+
+        return HL
+
+```
