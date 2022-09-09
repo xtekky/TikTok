@@ -18,3 +18,33 @@ gorgon string -> 04047dcd40000790ed08d0d90bf03d02707a0d90ed0fd06103f0601403507d0
          4 > version + hash encryption key key + encrypted hex string
          
  ```  
+
+encrypt key (key is hex list)
+
+```py
+    Z = 256
+    Y = encryption hex list from defined list (31 possibilities)
+    
+    def __encryption_key(self, Z: int, HX: list):
+        tmp = A = B = C = D = None
+        hexs = []
+
+        for i in range(Z):
+            hexs.append(i)
+
+        for i in range(Z):
+            if i == 0:
+                A = 0
+            elif tmp is not None:
+                A = tmp
+            else:
+                A = hexs[i - 1]
+            B = HX[i % 8]
+            if (A == 85) & (i != 1) & (tmp != 85):
+                A = 0
+            C = self.__hex_max(A + i + B)
+            tmp = C if C < i else None
+            D = hexs[C]
+            hexs[i] = D
+        return hexs
+```
